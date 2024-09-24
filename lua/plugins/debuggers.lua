@@ -13,23 +13,6 @@ return {
 		-- Ensure DAP UI is properly setup
 		require("dapui").setup()
 
-		dap.listeners.before.attach.dapui_config = function()
-			dapui.open()
-		end
-		dap.listeners.before.launch.dapui_config = function()
-			dapui.open()
-		end
-		dap.listeners.before.event_terminated.dapui_config = function()
-			dapui.close()
-		end
-		dap.listeners.before.event_exited.dapui_config = function()
-			dapui.close()
-		end
-
-		-- Key mappings for debugging
-		vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
-		vim.keymap.set("n", "<leader>dc", dap.continue, {})
-
 		-- Setup nvim-dap-vscode-js
 		require("dap-vscode-js").setup({
 			node_path = "node", -- Path of node executable
@@ -56,5 +39,22 @@ return {
 
 		-- Setup nvim-dap-python
 		require("dap-python").setup(os.getenv("HOME") .. "/.virtualenvs/debugpy/bin/python")
+
+		dap.listeners.before.attach.dapui_config = function()
+			dapui.open()
+		end
+		dap.listeners.before.launch.dapui_config = function()
+			dapui.open()
+		end
+		dap.listeners.before.event_terminated.dapui_config = function()
+			dapui.close()
+		end
+		dap.listeners.before.event_exited.dapui_config = function()
+			dapui.close()
+		end
+
+		-- Key mappings for debugging
+		vim.keymap.set("n", "<leader>dt", dap.toggle_breakpoint, {})
+		vim.keymap.set("n", "<leader>dc", dap.continue, {})
 	end,
 }
